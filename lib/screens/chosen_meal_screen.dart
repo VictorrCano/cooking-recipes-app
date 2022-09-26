@@ -12,7 +12,7 @@ class ChosenMealScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Meal chosenMeal = Meal(
+    Meal chosenMeal = const Meal(
       id: '',
       categories: [],
       title: '',
@@ -40,10 +40,47 @@ class ChosenMealScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Card(
-            child: Text(chosenMeal.affordability.name),
+            margin: EdgeInsets.all(10),
+            color: Colors.lightBlue,
+            child: Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                child: Text(chosenMeal.affordability.name)),
           ),
           Card(
-            child: Text(chosenMeal.complexity.name),
+            margin: EdgeInsets.all(10),
+            color: Colors.lightBlue,
+            child: Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                child: Text(chosenMeal.complexity.name)),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Image.network(chosenMeal.imageUrl),
+          ),
+          Expanded(
+            child: SizedBox(
+              height: 400,
+              width: 400,
+              child: ListView(
+                children: chosenMeal.steps.map(
+                  (e) {
+                    return Card(
+                      margin: EdgeInsets.all(10),
+                      color: Colors.grey,
+                      child: Text(
+                        e,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          height: 1.8,
+                        ),
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
+            ),
           )
         ],
       ),
