@@ -34,6 +34,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   .firstWhere(
                       (element) => element.id == widget._favoritesList[index])
                   .title),
+              onTap: () => (Navigator.of(context).pushNamed(
+                  '/chosen-meal-screen',
+                  arguments: widget._favoritesList[index])),
             );
           }),
     );

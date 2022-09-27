@@ -64,7 +64,7 @@ class CategoriesScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meals App'),
+        title: const Text('Meal Categories'),
       ),
       drawer: Drawer(
         child: Column(

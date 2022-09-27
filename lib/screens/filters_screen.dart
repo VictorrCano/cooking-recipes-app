@@ -34,21 +34,27 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   void goToSettings(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed('/filters-screen', arguments: [
-      _glutenFreeSwitch,
-      _vegetarianSwitch,
-      _veganSwitch,
-      _lactoseFreeSwitch
-    ]);
+    Navigator.of(context).pushReplacementNamed(
+      '/filters-screen',
+      arguments: [
+        _glutenFreeSwitch,
+        _vegetarianSwitch,
+        _veganSwitch,
+        _lactoseFreeSwitch
+      ],
+    );
   }
 
   void goToCategories(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed('/', arguments: [
-      _glutenFreeSwitch,
-      _vegetarianSwitch,
-      _veganSwitch,
-      _lactoseFreeSwitch
-    ]);
+    Navigator.of(context).pushReplacementNamed(
+      '/',
+      arguments: [
+        _glutenFreeSwitch,
+        _vegetarianSwitch,
+        _veganSwitch,
+        _lactoseFreeSwitch
+      ],
+    );
   }
 
   void goToFavorites(BuildContext context) {
