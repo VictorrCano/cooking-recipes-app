@@ -51,6 +51,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
     ]);
   }
 
+  void goToFavorites(BuildContext context) {
+    Navigator.of(context).pushNamed('/favorites-screen');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +76,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
             TextButton(
               onPressed: () => goToCategories(context),
               child: const Text('Categories'),
+            ),
+            TextButton(
+              onPressed: () => goToFavorites(context),
+              child: Text('Favorites'),
             ),
           ],
         ),

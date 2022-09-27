@@ -42,6 +42,10 @@ class CategoriesScreen extends StatelessWidget {
     ]);
   }
 
+  void goToFavorites(BuildContext context) {
+    Navigator.of(context).pushNamed('/favorites-screen');
+  }
+
   @override
   Widget build(BuildContext context) {
     final route = ModalRoute.of(context);
@@ -73,6 +77,10 @@ class CategoriesScreen extends StatelessWidget {
             TextButton(
               onPressed: () => goToCategories(context),
               child: Text('Categories'),
+            ),
+            TextButton(
+              onPressed: () => goToFavorites(context),
+              child: Text('Favorites'),
             ),
           ],
         ),

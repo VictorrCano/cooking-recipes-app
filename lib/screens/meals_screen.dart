@@ -7,8 +7,8 @@ import '../models/category.dart';
 import '../screens/filters_screen.dart';
 
 class MealsScreen extends StatelessWidget {
-  //final String chosenCategory;
-  //const MealsScreen({required this.chosenCategory, super.key});
+  //Function _addFavorite;
+  //MealsScreen(this._addFavorite, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +44,13 @@ class MealsScreen extends StatelessWidget {
       }
     }
 
+    //void goToMealPage(BuildContext context, String id, Function function) {
+    //  Navigator.of(context).pushNamed('/chosen-meal-screen',
+    //      arguments: {'id': id, 'function': function});
+    //}
+
     void goToMealPage(BuildContext context, String id) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) {
-            return ChosenMealScreen(mealId: id);
-          },
-        ),
-      );
+      Navigator.of(context).pushNamed('/chosen-meal-screen', arguments: id);
     }
 
     return Scaffold(
@@ -64,6 +63,7 @@ class MealsScreen extends StatelessWidget {
           return SizedBox(
             height: 100,
             child: InkWell(
+              //onTap: () => goToMealPage(context, e.id, _addFavorite),
               onTap: () => goToMealPage(context, e.id),
               child: Card(
                 margin: EdgeInsets.all(20),

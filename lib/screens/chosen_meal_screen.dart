@@ -7,11 +7,13 @@ import '../data/dummy_data.dart';
 import '../models/meal.dart';
 
 class ChosenMealScreen extends StatelessWidget {
-  final String mealId;
-  const ChosenMealScreen({required this.mealId, super.key});
+  Function _addFavorite;
+  ChosenMealScreen(this._addFavorite, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    final mealId = ModalRoute.of(context)!.settings.arguments as String;
+
     Meal chosenMeal = const Meal(
       id: '',
       categories: [],
@@ -35,6 +37,15 @@ class ChosenMealScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(chosenMeal.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.star,
+              color: Colors.white,
+            ),
+            onPressed: () => _addFavorite(chosenMeal.id),
+          )
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
