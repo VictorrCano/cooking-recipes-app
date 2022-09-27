@@ -2,25 +2,80 @@ import 'package:flutter/material.dart';
 
 import '../data/dummy_data.dart';
 import './meals_screen.dart';
+import '../screens/filters_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  bool _glutenFreeFilter = false;
+  bool _vegetarianFilter = false;
+  bool _veganFilter = false;
+  bool _lactoseFreeFilter = false;
+
+  CategoriesScreen({super.key});
 
   void selectCategory(BuildContext context, String id) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) {
-          return MealsScreen(chosenCategory: id);
-        },
-      ),
-    );
+    Navigator.of(context).pushNamed('/meals-screen', arguments: {
+      'id': id,
+      'filters': [
+        _glutenFreeFilter,
+        _vegetarianFilter,
+        _veganFilter,
+        _lactoseFreeFilter
+      ]
+    });
+  }
+
+  void goToSettings(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed('/filters-screen', arguments: [
+      _glutenFreeFilter,
+      _vegetarianFilter,
+      _veganFilter,
+      _lactoseFreeFilter
+    ]);
+  }
+
+  void goToCategories(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed('/', arguments: [
+      _glutenFreeFilter,
+      _vegetarianFilter,
+      _veganFilter,
+      _lactoseFreeFilter
+    ]);
   }
 
   @override
   Widget build(BuildContext context) {
+    final route = ModalRoute.of(context);
+    if (route != null && route.settings.arguments != null) {
+      final filterSettings = route.settings.arguments as List<bool>;
+      _glutenFreeFilter = filterSettings[0];
+      _vegetarianFilter = filterSettings[1];
+      _veganFilter = filterSettings[2];
+      _lactoseFreeFilter = filterSettings[3];
+    }
+
+    print(_glutenFreeFilter);
+    print(_vegetarianFilter);
+    print(_veganFilter);
+    print(_lactoseFreeFilter);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Meals App'),
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            const SizedBox(height: 100),
+            TextButton(
+              onPressed: () => goToSettings(context),
+              child: Text('Settings'),
+            ),
+            TextButton(
+              onPressed: () => goToCategories(context),
+              child: Text('Categories'),
+            ),
+          ],
+        ),
       ),
       body: GridView.count(
         crossAxisCount: 2,

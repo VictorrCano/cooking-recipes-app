@@ -4,14 +4,25 @@ import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
 import '../models/meal.dart';
 import '../models/category.dart';
+import '../screens/filters_screen.dart';
 
 class MealsScreen extends StatelessWidget {
-  final String chosenCategory;
-  const MealsScreen({required this.chosenCategory, super.key});
+  //final String chosenCategory;
+  //const MealsScreen({required this.chosenCategory, super.key});
 
   @override
   Widget build(BuildContext context) {
+    final passedArgs = ModalRoute.of(context)!.settings.arguments as Map;
+    String chosenCategory = passedArgs['id'];
+    List filters = passedArgs['filters'];
+
+    bool _glutenFreeFilter = filters[0];
+    bool _vegetarianFilter = filters[1];
+    bool _veganFilter = filters[2];
+    bool _lactoseFreeFilter = filters[3];
+
     List<Meal> mealsInCategory = [];
+    List<Meal> filteredMeals = [];
     String chosenCategoryName = '';
 
     for (var cat in DUMMY_CATEGORIES) {
@@ -21,7 +32,14 @@ class MealsScreen extends StatelessWidget {
     }
 
     for (var meal in DUMMY_MEALS) {
-      if (meal.categories.contains(chosenCategory)) {
+      if (meal.categories.contains(chosenCategory) &&
+          (meal.isGlutenFree == _glutenFreeFilter ||
+              _glutenFreeFilter == false) &&
+          (meal.isVegetarian == _vegetarianFilter ||
+              _vegetarianFilter == false) &&
+          (meal.isVegan == _veganFilter || _veganFilter == false) &&
+          (meal.isLactoseFree == _lactoseFreeFilter ||
+              _lactoseFreeFilter == false)) {
         mealsInCategory.add(meal);
       }
     }
